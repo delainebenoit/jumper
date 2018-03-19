@@ -23,7 +23,7 @@ public class Level {
 
     private final String CODE = " (=)o/\\<^>*éè+-";
     private final String SLOPE ="     +-    +-";
-    private String def = "(==\\^///==^==^\\\\^==/)----<^é>++(//=^=> ++o-- *- o +(==^=)";
+    private String def = "(==\\^///==^==^\\\\^==/)----<^é>+++(//=^=> ++o-- *- o +(==^=)";
 
 
     private int[] sprite_id;
