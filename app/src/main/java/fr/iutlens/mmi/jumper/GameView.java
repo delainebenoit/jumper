@@ -3,10 +3,8 @@ package fr.iutlens.mmi.jumper;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-
-import java.util.Arrays;
+import android.widget.TextView;
 
 import fr.iutlens.mmi.jumper.utils.AccelerationProxy;
 import fr.iutlens.mmi.jumper.utils.RefreshHandler;
@@ -19,7 +17,16 @@ public class GameView extends View implements TimerAction, AccelerationProxy.Acc
     private Level level;
     private float current_pos;
     private Hero hero;
+    private Fond fond;
     private double prep;
+    private TextView textViewScore;
+    private float score;
+
+
+    public void setScore(double score) {
+        this.score = (float) score;
+        textViewScore.setText(String.format("%.02f",score));
+    }
 
     public GameView(Context context) {
         super(context);
@@ -52,6 +59,11 @@ public class GameView extends View implements TimerAction, AccelerationProxy.Acc
         SpriteSheet.register(R.drawable.running_rabbit,3,3,this.getContext());
         hero = new Hero(R.drawable.running_rabbit,SPEED);
 
+        SpriteSheet.register(R.drawable.fond_running,2,1,this.getContext());
+        fond = new Fond(R.drawable.fond_running);
+
+
+
 
 
         // Gestion du rafraichissement de la vue. La méthode update (juste en dessous)
@@ -70,14 +82,17 @@ public class GameView extends View implements TimerAction, AccelerationProxy.Acc
     /**
      * Mise à jour (faite toutes les 30 ms)
      */
+
     @Override
     public void update() {
         if (this.isShown()) { // Si la vue est visible
-            timer.scheduleRefresh(30); // programme le prochain rafraichissement
+            timer.scheduleRefresh(20); // programme le prochain rafraichissement
             current_pos += SPEED;
             if (current_pos>level.getLength()) current_pos = 0;
             hero.update(level.getFloor(current_pos+1),level.getSlope(current_pos+1));
             invalidate(); // demande à rafraichir la vue
+
+            setScore(score+1);
         }
     }
 
@@ -90,7 +105,10 @@ public class GameView extends View implements TimerAction, AccelerationProxy.Acc
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         // On met une couleur de fond
+
         canvas.drawColor(0xff000000);
+        fond.paint(canvas, getHeight());
+
 
         // On choisit la transformation à appliquer à la vue i.e. la position
         // de la "camera"
@@ -141,5 +159,11 @@ public class GameView extends View implements TimerAction, AccelerationProxy.Acc
             }
             prep = 0;
         }*/
+    }
+
+
+    public void setTextViewScore(TextView score) {
+        textViewScore = score;
+
     }
 }
