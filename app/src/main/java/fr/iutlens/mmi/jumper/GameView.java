@@ -3,7 +3,9 @@ package fr.iutlens.mmi.jumper;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import fr.iutlens.mmi.jumper.utils.AccelerationProxy;
 import fr.iutlens.mmi.jumper.utils.RefreshHandler;
@@ -19,6 +21,14 @@ public class GameView extends View implements TimerAction, AccelerationProxy.Acc
     private double prep;
     private Fond fond;
     private float d;
+    private TextView textViewScore;
+    private float score;
+
+
+    public void setScore(double score) {
+        this.score = (float) score;
+        textViewScore.setText(String.format("%.02f",score));
+    }
 
     public GameView(Context context) {
         super(context);
@@ -37,7 +47,7 @@ public class GameView extends View implements TimerAction, AccelerationProxy.Acc
 
     /**
      * Initialisation de la vue
-     * <p>
+     *
      * Tous les constructeurs (au-dessus) renvoient ici.
      *
      * @param attrs
@@ -72,15 +82,18 @@ public class GameView extends View implements TimerAction, AccelerationProxy.Acc
     /**
      * Mise à jour (faite toutes les 30 ms)
      */
+
     @Override
     public void update() {
         if (this.isShown()) { // Si la vue est visible
-            timer.scheduleRefresh(30); // programme le prochain rafraichissement
+            timer.scheduleRefresh(20); // programme le prochain rafraichissement
             current_pos += SPEED;
             d = d + SPEED / 90f;
             if (current_pos > level.getLength()) current_pos = 0;
             hero.update(level.getFloor(current_pos + 1), level.getSlope(current_pos + 1));
             invalidate(); // demande à rafraichir la vue
+
+            setScore(score+1);
         }
     }
 
@@ -147,5 +160,11 @@ public class GameView extends View implements TimerAction, AccelerationProxy.Acc
             }
             prep = 0;
         }*/
+    }
+
+
+    public void setTextViewScore(TextView score) {
+        textViewScore = score;
+
     }
 }
