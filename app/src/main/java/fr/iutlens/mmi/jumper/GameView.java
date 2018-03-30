@@ -27,7 +27,7 @@ public class GameView extends View implements TimerAction, AccelerationProxy.Acc
 
     public void setScore(double score) {
         this.score = (float) score;
-        textViewScore.setText(String.format("%.02f",score));
+        if (textViewScore != null) textViewScore.setText(String.format("%.1f",score));
     }
 
     public GameView(Context context) {
@@ -93,7 +93,7 @@ public class GameView extends View implements TimerAction, AccelerationProxy.Acc
             hero.update(level.getFloor(current_pos + 1), level.getSlope(current_pos + 1));
             invalidate(); // demande à rafraichir la vue
 
-            setScore(score+1);
+            setScore(score+0.01);
         }
     }
 

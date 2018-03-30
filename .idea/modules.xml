@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/jumper.iml" filepath="$PROJECT_DIR$/jumper.iml" />
+      <module fileurl="file://C:\Users\julie\AndroidStudioProjects\jumper\jumper.iml" filepath="C:\Users\julie\AndroidStudioProjects\jumper\jumper.iml" />
     </modules>
   </component>
 </project>
