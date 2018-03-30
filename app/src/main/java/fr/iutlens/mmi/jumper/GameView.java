@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -74,7 +75,21 @@ public class GameView extends View implements TimerAction, AccelerationProxy.Acc
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!timer.isRunning()) timer.scheduleRefresh(30);
+                if (!timer.isRunning())
+                    timer.scheduleRefresh(30);
+                else {
+
+                }
+            }
+        });
+        this.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (timer.isRunning() && motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+                    hero.jump(3);
+                    return true;
+                }
+                return false;
             }
         });
     }

@@ -1,6 +1,7 @@
 package fr.iutlens.mmi.jumper;
 
 import android.graphics.Canvas;
+import android.util.Log;
 
 import fr.iutlens.mmi.jumper.utils.SpriteSheet;
 
@@ -50,6 +51,10 @@ public class Hero {
         y += vy; // inertie
         float altitude = y-floor;
         if (altitude <0){ // On est dans le sol : atterrissage
+            float a = altitude-vy+slope*vx;
+            if (a <-0.5f && altitude<-0.5f) {
+                Log.d("update","planté");
+            }
             vy = 0; //floor-y;
             y = floor;
             altitude = 0;
