@@ -27,6 +27,8 @@ public class Hero {
 
     private float jump;
 
+    private boolean hit;
+
     private int frame;
     private int cpt;
 
@@ -39,6 +41,7 @@ public class Hero {
         jump = 0;
         frame =0;
         cpt = 0;
+
         this.vx = vx;
     }
 
