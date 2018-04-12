@@ -1,4 +1,4 @@
-package fr.iutlens.mmi.jumper;
+package fr.iutlens.mmi.spacejump;
 
 import org.junit.Test;
 

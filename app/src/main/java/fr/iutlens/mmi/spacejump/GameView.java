@@ -1,17 +1,17 @@
-package fr.iutlens.mmi.jumper;
+package fr.iutlens.mmi.spacejump;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import fr.iutlens.mmi.jumper.utils.AccelerationProxy;
-import fr.iutlens.mmi.jumper.utils.RefreshHandler;
-import fr.iutlens.mmi.jumper.utils.SpriteSheet;
-import fr.iutlens.mmi.jumper.utils.TimerAction;
+import fr.iutlens.mmi.spacejump.utils.AccelerationProxy;
+import fr.iutlens.mmi.spacejump.utils.RefreshHandler;
+import fr.iutlens.mmi.spacejump.utils.SpriteSheet;
+import fr.iutlens.mmi.spacejump.utils.TimerAction;
 
 public class GameView extends View implements TimerAction, AccelerationProxy.AccelerationListener {
     public static final float SPEED = 0.1f;
@@ -75,9 +75,10 @@ public class GameView extends View implements TimerAction, AccelerationProxy.Acc
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!timer.isRunning())
+                if (!timer.isRunning() && (!hero.hit))
                     timer.scheduleRefresh(30);
-                else {
+                else {if (hero.hit)
+                    ((Activity) getContext()).finish();
 
                 }
             }

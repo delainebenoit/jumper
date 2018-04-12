@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    package="fr.iutlens.mmi.jumper">
+    package="fr.iutlens.mmi.spacejump">
 
 
     <application
@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity android:name="fr.iutlens.mmi.spacejump.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
 

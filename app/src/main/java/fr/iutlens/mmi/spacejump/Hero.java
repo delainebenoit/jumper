@@ -1,9 +1,9 @@
-package fr.iutlens.mmi.jumper;
+package fr.iutlens.mmi.spacejump;
 
 import android.graphics.Canvas;
 import android.util.Log;
 
-import fr.iutlens.mmi.jumper.utils.SpriteSheet;
+import fr.iutlens.mmi.spacejump.utils.SpriteSheet;
 
 /**
  * Created by dubois on 30/12/2017.
@@ -58,10 +58,11 @@ public class Hero {
             if (a <-0.5f && altitude<-0.5f) {
                 hit = true;
                 Log.d("update","planté");
-            }
+            } else {
             vy = 0; //floor-y;
             y = floor;
             altitude = 0;
+            }
         }
         if (altitude == 0){ // en contact avec le sol
             nbjump = 0;
@@ -95,6 +96,7 @@ public class Hero {
     }
 
     public void jump(float strength) {
+        if (hit) return;
         if (strength>MAX_STRENGTH) strength = MAX_STRENGTH;
         if (strength> jump) jump = strength;
     }

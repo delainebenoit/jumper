@@ -1,8 +1,8 @@
-package fr.iutlens.mmi.jumper;
+package fr.iutlens.mmi.spacejump;
 
 import android.graphics.Canvas;
 
-import fr.iutlens.mmi.jumper.utils.SpriteSheet;
+import fr.iutlens.mmi.spacejump.utils.SpriteSheet;
 
 /**
  * Created by mehdi on 16/03/2018.
