@@ -27,11 +27,10 @@ public class Hero {
 
     private float jump;
 
-    private boolean hit;
-
     private int frame;
     private int cpt;
-
+    private int nbjump;
+    public boolean hit;
 
 
     public Hero(int sprite_id, float vx){
@@ -51,11 +50,13 @@ public class Hero {
     }
 
     public void update(float floor, float slope){
+        hit = false;
         y += vy; // inertie
         float altitude = y-floor;
         if (altitude <0){ // On est dans le sol : atterrissage
             float a = altitude-vy+slope*vx;
             if (a <-0.5f && altitude<-0.5f) {
+                hit = true;
                 Log.d("update","planté");
             }
             vy = 0; //floor-y;
@@ -63,9 +64,11 @@ public class Hero {
             altitude = 0;
         }
         if (altitude == 0){ // en contact avec le sol
+            nbjump = 0;
             if (jump != 0) {
                 vy = jump*IMPULSE*vx; // On saute ?
                 frame = 3;
+                nbjump =   nbjump + 1;
             } else {
 //                vy = -G*vx;
                 vy = (slope-G)*vx; // On suit le sol...
@@ -73,6 +76,12 @@ public class Hero {
                 if (cpt==0) frame = (frame+1)%8;
             }
         } else { // actuellement en vol
+            if ( jump != 0 && nbjump<2) {
+                vy = jump * IMPULSE * vx; // On saute ?
+                frame = 3;
+                nbjump = nbjump + 1;
+            }
+
             vy -= G*vx; // effet de la gravité
             frame = (vy>0) ? 3 : 5;
 //            if (y < floor+slope*vx) y = floor+slope*vx; // atterrissage ?

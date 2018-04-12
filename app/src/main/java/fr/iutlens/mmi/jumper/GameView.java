@@ -83,12 +83,12 @@ public class GameView extends View implements TimerAction, AccelerationProxy.Acc
             }
         });
         this.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (timer.isRunning() && motionEvent.getAction()==MotionEvent.ACTION_DOWN){
-                    hero.jump(3);
-                    return true;
-                }
+                    @Override
+                    public boolean onTouch(View view, MotionEvent motionEvent) {
+                        if (timer.isRunning() && motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+                            hero.jump(3);
+                            return true;
+                        }
                 return false;
             }
         });
@@ -101,7 +101,8 @@ public class GameView extends View implements TimerAction, AccelerationProxy.Acc
     @Override
     public void update() {
         if (this.isShown()) { // Si la vue est visible
-            timer.scheduleRefresh(20); // programme le prochain rafraichissement
+            if ( !hero.hit)
+                timer.scheduleRefresh(10); // programme le prochain rafraichissement
             current_pos += SPEED;
             d = d + SPEED / 90f;
             if (current_pos > level.getLength()) current_pos = 0;
